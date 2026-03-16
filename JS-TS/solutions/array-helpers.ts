@@ -59,9 +59,9 @@ let result= {} as Record<K, T[]>;
   for (let item of source ){
     const key = keySelector(item);
     if (!result[key]) {
-         result[key] = []
+         result[key] = [];
     }
-  result[key].push(item)
+  result[key].push(item);
   }
 return result;
 
