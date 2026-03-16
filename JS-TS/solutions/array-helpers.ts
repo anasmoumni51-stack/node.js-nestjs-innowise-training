@@ -29,20 +29,40 @@ for (let i= 0; i< source.length; i++){
 export function reduceArray<T, R>(source: readonly T[], reducer: (acc: R, item: T, index: number) => R, initial: R): R {
  if (source === null || source === undefined) { throw new Error('reduceArray: not implemented') ;}
  let acc = initial
- let returnedReducer: R;
  for (let i= 0; i < source.length; i++){
   let src = source[i];
-  returnedReducer = reducer(acc, src, i)
+  acc = reducer(acc, src, i)
   }
-  return returnedReducer;
+  return acc;
 }
 
 export function partition<T>(source: readonly T[], predicate: (item: T) => boolean): [T[], T[]] {
-
-  throw new Error('partition: not implemented');
+if (source === null || source === undefined) { throw new Error('partition: not implemented'); }
+let pass: T[] = []
+let fail: T[] = []
+  for (let item of source ){
+    if (predicate(item)){
+      pass.push(item)
+    } else {
+    fail.push(item)
+    }
+  }
+  const tuple: [T[], T[]] = [pass, fail]
+  return tuple;
 }
 
 export function groupBy<T, K extends PropertyKey>(source: readonly T[], keySelector: (item: T) => K): Record<K, T[]> {
+if (source === null || source === undefined) { 
+  throw new Error('groupBy: not implemented'); 
+}
+let result= {} as Record<K, T[]>;
+  for (let item of source ){
+    const key = keySelector(item);
+    if (!result[key]) {
+         result[key] = []
+    }
+  result[key].push(item)
+  }
+return result;
 
-  throw new Error('groupBy: not implemented');
 }
