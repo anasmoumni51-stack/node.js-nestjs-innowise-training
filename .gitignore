@@ -1,1 +1,4 @@
 node_modules/
+.DS_Store
+DB/
+React-CSS/.DS_Store
