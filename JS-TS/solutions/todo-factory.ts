@@ -5,8 +5,8 @@ let nextId = 1;
 //export function createTodo(input: { title: string }): Todo;
 //export function createTodo(input: { title: string; description: string }): Todo;
 
-export function createTodo(input: Partial<NewTodo>): Todo {
-  if (!input || !input.title) {
+export function createTodo(input: NewTodo): Todo {
+  if (!input || !input.title ) {
     throw new Error('createTodo: not implemented');
   }
 
