@@ -1,11 +1,5 @@
 export class InMemoryRepository<T extends { id: number }> {
-  // private storage
-  // Implementation plan:
-  // 1) add: push entity into items and return it.
-  // 2) update: find by id, merge patch, replace in array, return updated entity.
-  // 3) remove: delete matching item from items.
-  // 4) findById: return first match or undefined.
-  // 5) findAll: return a shallow copy to protect internal state.
+  
   private items: T[] = [];
 
   add(entity: T): T {
@@ -50,40 +44,3 @@ export class InMemoryRepository<T extends { id: number }> {
     return [...this.items]
   }
 }
-
-
-
-
-//   add(entity: T): T {
-//     this.items = [...this.items, entity];
-//     return entity;
-//   }
-
-//   update(id: number, patch: Partial<T>): T {
-//     const index = this.items.findIndex((item) => item.id === id);
-//     if (index === -1) {
-//       throw new Error(`Entity with id ${id} not found`);
-//     }
-
-//     const updated = { ...this.items[index], ...patch };
-//     this.items[index] = updated;
-//     return updated;
-//   }
-
-//   remove(id: number): void {
-//     const exists = this.items.some((item) => item.id === id);
-//     if (!exists) {
-//       throw new Error(`Entity with id ${id} not found`);
-//     }
-
-//     this.items = this.items.filter((item) => item.id !== id);
-//   }
-
-//   findById(id: number): T | undefined {
-//     return this.items.find((item) => item.id === id);
-//   }
-
-//   findAll(): T[] {
-//     return [...this.items];
-//   }
-// }
