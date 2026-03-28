@@ -6,7 +6,8 @@ export class TodoApi {
 
   async getAll(): Promise<Todo[]> {
     try {
-    let result = new Promise<Todo[]> ( (resolve, reject) => setTimeout( () => resolve(this.repo.findAll()) ,2) )
+    let result = await new Promise<Todo[]> ( (resolve, reject) => 
+      setTimeout( () => resolve(this.repo.findAll()) ,300) )
     return result;
     } catch (err) {
       throw new Error('getAll: not implemented');
@@ -16,7 +17,7 @@ export class TodoApi {
 
   async add(newTodo: NewTodo): Promise<Todo> {
     try {
-      let result = new Promise<Todo>((resolve, reject) => { 
+      let result = await new Promise<Todo>((resolve, reject) => { 
         setTimeout( () => {
         const todo: Todo = {
           ...newTodo,
@@ -26,7 +27,7 @@ export class TodoApi {
           createdAt: new Date(),
          }
         resolve(this.repo.add(todo)); 
-      }, 2);
+      }, 300);
     });
     return result;
     
@@ -38,9 +39,9 @@ export class TodoApi {
 
   async update(id: number, update: Partial<Omit<Todo, 'id' | 'createdAt'>>): Promise<Todo> {
     try {
-        let result = new Promise<Todo>( (resolve, reject) => setTimeout(() => {
+        let result = await new Promise<Todo>( (resolve, reject) => setTimeout(() => {
           resolve(this.repo.update(id, update))
-        }, 2) );
+        }, 300) );
         return result;
     } catch (error) {
     throw new Error('update: not implemented');
@@ -50,10 +51,9 @@ export class TodoApi {
   async remove(id: number): Promise<void> {
 
     try {
-      let result = new Promise((resolve) => setTimeout(() => {
+      let result = await new Promise((resolve) => setTimeout(() => {
         resolve(this.repo.remove(id))
-        return result;
-      }, 2));
+      }, 300));
       
     } catch (error) {
       throw new Error('remove: not implemented');
